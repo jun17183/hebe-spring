@@ -99,16 +99,6 @@ public class UserService {
         res.addCookie(refreshToken);
     }
 
-//    public String fileToString(MultipartFile file, int iuser) {
-//        String path = "C:\\study\\practice\\springboot\\HEBE-prac\\real\\HEBE-app_10\\public\\img\\user\\" + iuser + "\\profile";
-//        File dir = new File(path);
-//        if(!dir.exists()) { dir.mkdirs(); }
-//        File target = new File(path + "/" + iuser + ".jpg");
-//        try { file.transferTo(target); }
-//        catch (Exception e) { e.printStackTrace(); }
-//        return "/img/user/" + iuser + "/profile/" + iuser + ".jpg";
-//    }
-
     public String fileToString(MultipartFile mf, int iuser) {
         String ext = FilenameUtils.getExtension(mf.getOriginalFilename());
         String saveFileName = UUID.randomUUID().toString() + "." + ext;
@@ -125,6 +115,7 @@ public class UserService {
 
             // 파일 업로드
             String saveFilePath = uploadImageS3.upload(uploadFile, filePath, saveFileName);
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("파일을 업로드 하던 중 에러가 발생했습니다.");
