@@ -64,6 +64,24 @@ public class UserController {
         System.out.println("로그아웃");
     }
 
+//    @PostMapping("/profileMod")
+//    public ResponseEntity<?> profileMod(@RequestParam(value="profileimg", required = false) MultipartFile file, String nickname, String introduction, int iuser) {
+//        UserEntity user = new UserEntity();
+//        user.setNickname(nickname);
+//        user.setIntroduction(introduction);
+//        user.setIuser(iuser);
+//
+//        if(file != null) {
+//            String img = userService.fileToString(file, iuser);
+//            user.setProfileimg(img);
+//        }
+//
+//        userService.profileMod(user);
+//        user.setPassword("");
+//
+//        return ResponseEntity.ok(user);
+//    }
+
     @PostMapping("/profileMod")
     public ResponseEntity<?> profileMod(@RequestParam(value="profileimg", required = false) MultipartFile file, String nickname, String introduction, int iuser) {
         UserEntity user = new UserEntity();
@@ -71,11 +89,10 @@ public class UserController {
         user.setIntroduction(introduction);
         user.setIuser(iuser);
 
-        if(file != null) {
-            String img = userService.fileToString(file, iuser);
-            user.setProfileimg(img);
-        }
+        String img = userService.fileToString(file, iuser);
+        user.setProfileimg(img);
 
+        System.out.println(user);
         userService.profileMod(user);
         user.setPassword("");
 
