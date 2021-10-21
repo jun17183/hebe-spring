@@ -10,4 +10,7 @@ public interface UserMapper {
     int selNickname(String nickname);
     int updUser(UserEntity user);
     UserEntity selNameProvider(UserEntity user);
+    String selUserPw(int iuser);
+    int delUser(int iuser);
+    int delData(int iuser);
 }

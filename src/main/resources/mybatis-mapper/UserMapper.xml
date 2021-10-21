@@ -23,4 +23,19 @@
         SELECT * FROM userdb
         WHERE username = #{username} AND provider = #{provider}
     </select>
+
+    <select id="selUserPw" resultType="String">
+        SELECT password FROM userdb
+        WHERE iuser = ${iuser}
+    </select>
+
+    <delete id="delData">
+        DELETE FROM cmtdb WHERE iuser = ${iuser};
+        DELETE FROM favdb WHERE iuser = ${iuser};
+        DELETE FROM diarydb WHERE iuser = ${iuser};
+    </delete>
+
+    <delete id="delUser">
+        DELETE FROM userdb WHERE iuser = ${iuser};
+    </delete>
 </mapper>

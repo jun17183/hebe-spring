@@ -21,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,7 +67,7 @@ public class UserService {
     public UserEntity apiLogin(UserEntity user, HttpServletResponse res) {
         UserEntity userEntity = userMapper.selNameProvider(user);
 
-        if (userEntity == null && !user.getProvider().equals(userEntity.getProvider())) {
+        if (userEntity == null) {
             String uuid = UUID.randomUUID().toString().toUpperCase();
             String nickname = uuid.substring(uuid.length() - 6);
 
@@ -131,5 +132,17 @@ public class UserService {
 
     public void profileMod(UserEntity user) {
         userMapper.updUser(user);
+    }
+
+    public int selUserPw(Map<String,String> user) {
+        int result = 0;
+        int iuser = Integer.parseInt(user.get("iuser"));
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String selPw = userMapper.selUserPw(iuser);
+        if(passwordEncoder.matches(user.get("password"),selPw) == true) {
+            userMapper.delData(iuser);
+            result = userMapper.delUser(iuser);
+        }
+        return result;
     }
 }

@@ -27,7 +27,8 @@
     </update>
 
     <insert id="insTodoList">
-        insert into tododb (iuser,t_num,t_text,done,regdt) values (#{iuser},#{t_num},#{t_text},#{done},#{regdt});
+        insert into tododb (iuser,t_num,t_text,done,regdt)
+        values (#{iuser},#{t_num},#{t_text},#{done},#{regdt});
     </insert>
 
     <delete id="delTodoList">

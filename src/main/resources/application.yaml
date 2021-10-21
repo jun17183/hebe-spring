@@ -70,8 +70,6 @@ spring:
   # https://github.com/microsoftarchive/redis/releases/tag/win-3.2.100
   # Redis-x64-3.2.100.msi install
   redis:
-    # host: localhost
-    # host: hebe-db.cok6p3wjd2e5.ap-northeast-2.rds.amazonaws.com
     host: ec2-15-164-202-112.ap-northeast-2.compute.amazonaws.com
     port: 6379
 

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -26,12 +27,11 @@ public class UserController {
 
     @PostMapping("/joinAuth")
     public String joinAuth(@RequestBody UserDTO param) {
-        String authKey = "1";
         int result = userService.selUsername(param.getUsername());
         if(result == 0) {
             return  mailSendService.sendMail(param.getUsername());
         }
-        return authKey;
+        return Integer.toString(result);
     }
 
     @PostMapping("/nickname")
@@ -88,5 +88,15 @@ public class UserController {
         UserEntity user = userService.apiLogin(param, res);
         user.setPassword(null);
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/delUser")
+    public int delUser(@RequestBody Map<String,String> user, HttpServletResponse res) {
+        int result = userService.selUserPw(user);
+        System.out.println("result : " + result);
+        if(result == 1) {
+            logout(res);
+        }
+        return result;
     }
 }

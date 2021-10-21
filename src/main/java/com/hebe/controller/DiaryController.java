@@ -25,9 +25,7 @@ public class DiaryController {
     // 특정 유저 게시글 조회
     @PostMapping("/diary")
     public List<CardDomain> selUserDiary(UserEntity param) {
-        System.out.println("/diary 작동");
         List<CardDomain> list = DiaryService.selUserDiary(param);
-        System.out.println(list);
         return list;
     }
 
@@ -55,8 +53,6 @@ public class DiaryController {
     public String uploadImage(MultipartFile img, int iboard, int iuser) { // 기존엔 String 타입
         String filePath = "img/" + iuser + "/" + iboard;
         return ImageManagerService.createAndUploadFile(img, filePath);
-
-        // return DiaryService.uploadImage(img, iboard, iuser);
     }
 
     // 글 작성
